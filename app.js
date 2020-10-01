@@ -2,7 +2,11 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const layout = require('./views/layout');
+const { db } = require('./models');
 
+db.authenticate().then(() => {
+  console.log('connected to database');
+});
 app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 // parses url-encoded bodies
